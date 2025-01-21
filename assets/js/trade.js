@@ -55,7 +55,7 @@ function loadBal() {
             $('.balance b').text($("#action").val() == "Buy" ? formatToCurrency(bal['USDT']['MarginAvailableBalance'], 6) : formatToCurrency(bal[$(".Ccoin").first().text()]['MarginAvailableBalance'], 6));
         }
         else if (tradeType.toLowerCase() == "future") {
-            $('.balance').text((formatToCurrency(bal['USDT']['FuturesAvailableBalance'], 6)) + " USDT");
+            $('.balance').text((formatToCurrency(bal['USDT']['AvailableBalance'], 6)) + " USDT");
         }
     }
 }
