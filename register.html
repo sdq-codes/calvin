@@ -220,11 +220,86 @@ div#google_translate_element {
         {
             display: none !important;    
         }
-    </style> 
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </style>
 </head>
 <body id="body">
-    <form method="post" action="https://bitvez.com/register.aspx" id="form1">
+
+    <script>
+        $(document).ready(function() {
+            // Bind the submit event to the form
+            $('form.main-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Serialize the form data
+                var formData = {
+                    email: $('#txtemail').val(),
+                    password: $('#txtpassword').val(),
+                    refID: $('#refID').val(),
+                    terms_accepted: $('input[type="checkbox"]').prop('checked') // Checkbox status
+                };
+
+                // Send the data via an API request using jQuery
+                $.ajax({
+                    url: 'http://localhost:8000/api/v1/auth/register', // API endpoint
+                    type: 'POST', // Request method
+                    data: formData, // Form data
+                    success: function(response) {
+                        // Handle the successful response
+                        console.log('Success:', response);
+                        // You can redirect the user or show a success message
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.log('Error:', error);
+                        alert('Registration failed. Please try again.');
+                    }
+                });
+            });
+            $('#form1').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Serialize the form data
+                var formData = {
+                    email: $('#txtemail').val(),
+                    password: $('#txtpassword').val(),
+                };
+
+                // Send the data via an API request using jQuery
+                $.ajax({
+                    url: 'http://localhost:8000/api/v1/auth/register', // API endpoint
+                    type: 'POST', // Request method
+                    data: formData, // Form data
+                    success: function(response) {
+                        // Handle the successful response
+                        localStorage.setItem('user', JSON.stringify(response.data))
+                        localStorage.setItem('token', JSON.stringify(response.access_token))
+                        alert('Registration Successful')
+                        window.location.href = 'asset-overview.html';
+                            console.log('Success:', response);
+                        // You can redirect the user or show a success message
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        for (var field in xhr.responseJSON.data) {
+                                // Get the array of messages for each field
+                                var messages = xhr.responseJSON.data[field];
+
+                                // Loop through each message in the array
+                                messages.forEach(function(message) {
+                                    alert(message); // Print field and message
+                                });
+                        }
+                    }
+                });
+            });
+
+            // Toggle Referral ID input visibility
+            $('#refBtn').on('click', function() {
+                $('#refArea').toggleClass('hidden');
+            });
+        });
+    </script>
+    <form id="form1">
 <div class="aspNetHidden">
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="zk3wXiW5GzGZDHNHJ+ZN0XTKK7COhifN+6V8w/+WT98gQBhxkzF8DOZOWC0rvP9JHSesOa/9XTw/w2YGAVzV4viSvXtc4ctU2BAF/5plspNGaaRvWxJbOpTfPHN+uAaeeo7VhU/Pn9V58s2/Ywof5g==" />
 </div>
@@ -1296,11 +1371,6 @@ div#google_translate_element {
                               Privacy Policy
                             </a><!----></span></label><!----></div>
                     </div>
-                      <div class="el-form-item UGDxrH"><!---->
-                      <div class="el-form-item__content">
-                          <div class="g-recaptcha" data-sitekey="6LeHqJUqAAAAAH96hn9FiHV3T_QNyBDwDH9dQ2Fc"></div>
-                          </div>
-                          </div>
                     <div class="el-form-item UGDxrH"><!---->
                       <div class="el-form-item__content">
                           <input type="submit" name="ctl00$ContentPlaceHolder1$Button1" value="Sign Up" onclick="return validateCaptcha();" id="Button1" class="el-button el-button--primary EqRvbG" disabled="" />
@@ -1350,19 +1420,6 @@ div#google_translate_element {
             $("#refBtn i").toggleClass("el-icon-arrow-up").toggleClass("el-icon-arrow-down");
         }
     </script>
-    <script>
-    function validateCaptcha() {
-        var response = grecaptcha.getResponse();
-        if (response.length == 0) {
-            // CAPTCHA not verified
-            alert("Please verify that you are not a robot.");
-            return false;
-        } else {
-            // CAPTCHA verified
-            return true;
-        }
-    }
-</script>
 
 
           <footer class="comp-global-footer ibm-font" data-v-53bff0ac data-v-69400e95>
