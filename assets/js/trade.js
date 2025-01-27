@@ -94,7 +94,8 @@ function loadChat(s) {
 
 function placeTrade(t, b) {
     event.preventDefault();
-    if (bal) {
+    const token = localStorage.getItem('token');
+    if (token) {
         var v = $('#txtAmt').val();
         v = unformatCurrency(v);
         if (isNaN(v)) {
@@ -115,39 +116,40 @@ function placeTrade(t, b) {
             var lev = $(".margin-ratio .ratio").text();
         }
         var tt = $("#tradeType").val();
+        showDangerAlert();
 
-        $.getJSON("../../APIs/place-trade.aspx?t=" + t + "&s1=" + s1 + "&s2=" + s2 + "&o=" + o + "&v=" + v + "&for=" + copyFor + "&tp=" + tp + "&sl=" + sl+"&lev="+lev+"&tt="+tt, function (data) {
-            console.log(data.code);
-            if (data.code == "1") {
-                showSuccessAlert();
-                $('#txtAmt').val("0.00");
-                $.getJSON("sendtrademail.aspx?t=" + t + "&s=" + s + "&o=" + o + "&v=" + v + "&tp=" + tp + "&sl=" + sl, function (data) {
-
-                });
-                //loadBal();
-                $("#" + b).html(t);
-                $("#" + b).prop("disabled", false);
-            }
-            else if (data.code == "0") {
-                showDangerAlert();
-                $("#" + b).html(t);
-                $("#" + b).prop("disabled", false);
-            }
-            else if (data.code == "3") {
-                showDangerAlert();
-                $("#" + b).html(t);
-                $("#" + b).prop("disabled", false);
-            }
-            else if (data.code == "17") {
-                window.location.href = "../../../verify.aspx?lowlevel=1";
-            }
-            else {
-                window.location.reload();
-            }
-        });
+        // $.getJSON("../../APIs/place-trade.aspx?t=" + t + "&s1=" + s1 + "&s2=" + s2 + "&o=" + o + "&v=" + v + "&for=" + copyFor + "&tp=" + tp + "&sl=" + sl+"&lev="+lev+"&tt="+tt, function (data) {
+        //     console.log(data.code);
+        //     if (data.code == "1") {
+        //         showSuccessAlert();
+        //         $('#txtAmt').val("0.00");
+        //         $.getJSON("sendtrademail.aspx?t=" + t + "&s=" + s + "&o=" + o + "&v=" + v + "&tp=" + tp + "&sl=" + sl, function (data) {
+        //
+        //         });
+        //         //loadBal();
+        //         $("#" + b).html(t);
+        //         $("#" + b).prop("disabled", false);
+        //     }
+        //     else if (data.code == "0") {
+        //         showDangerAlert();
+        //         $("#" + b).html(t);
+        //         $("#" + b).prop("disabled", false);
+        //     }
+        //     else if (data.code == "3") {
+        //         showDangerAlert();
+        //         $("#" + b).html(t);
+        //         $("#" + b).prop("disabled", false);
+        //     }
+        //     else if (data.code == "17") {
+        //         window.location.href = "../../../verify.aspx?lowlevel=1";
+        //     }
+        //     else {
+        //         window.location.reload();
+        //     }
+        // });
     }
     else {
-        window.location = "login.aspx?tourl=spot.aspx";
+        window.location = "login.html";
     }
 }
 
