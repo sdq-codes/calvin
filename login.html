@@ -1252,8 +1252,10 @@ div#google_translate_element {
                     },
                     error: function(xhr, status, error) {
                         // Handle error
-                        console.log(xhr.responseJSON.message)
-                        alert(xhr.responseJSON.message);
+                        console.log(xhr)
+                        console.log(status)
+                        console.log(error)
+                        alert('Invalid email and password.');
                     }
                 });
             }
