@@ -1727,7 +1727,7 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
                                         Details
                                     </a>
 
-                                <input onclick="changeColor()" name="ctl00$ContentPlaceHolder1$ctl01$Button1" value="Copy" id="Button1Copy" class="r-button2 r-button2-primary r-button2-large r-button2-enabled" style="flex-grow: 1; font-size: 16px;" />
+                                <input onclick="changeColor1()" name="ctl00$ContentPlaceHolder1$ctl01$Button1" value="Copy" id="Button1Copy" class="r-button2 r-button2-primary r-button2-large r-button2-enabled" style="flex-grow: 1; font-size: 16px;" />
                                 
                             </div>
                         </div>
@@ -1738,9 +1738,16 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
 <input type="hidden" name="ctl00$ContentPlaceHolder1$ctl00$txtID" id="txtID" value="64653603" />
 
 <script>
-    function changeColor() {
+    function changeColor1() {
         const token = localStorage.getItem('token');
         if (token) {
+            if (document.getElementById('Button1Copy').value == 'Copy') {
+                document.getElementById('Button1Copy').style.backgroundColor = 'orange';
+                document.getElementById('Button1Copy').value = 'Uncopy';
+            } else {
+                document.getElementById('Button1Copy').style.removeProperty('background-color');
+                document.getElementById('Button1Copy').value = 'Copy';
+            }
             document.getElementById('Button1Copy').style.backgroundColor = 'orange';
         } else {
             window.location.href = '/register.html'
@@ -1831,7 +1838,7 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
                                     Details
                                 </a>
 
-                                <input onclick="changeColor()" name="ctl00$ContentPlaceHolder1$ctl01$Button1" value="Copy" id="Button2Copy" class="r-button2 r-button2-primary r-button2-large r-button2-enabled" style="flex-grow: 1; font-size: 16px;" />
+                                <input onclick="changeColor2()" name="ctl00$ContentPlaceHolder1$ctl01$Button1" value="Copy" id="Button2Copy" class="r-button2 r-button2-primary r-button2-large r-button2-enabled" style="flex-grow: 1; font-size: 16px;" />
                                 
                             </div>
                         </div>
@@ -1842,10 +1849,16 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
 <input type="hidden" name="ctl00$ContentPlaceHolder1$ctl01$txtID" id="txtID" value="64653606" />
 
 <script>
-    function changeColor() {
+    function changeColor2() {
         const token = localStorage.getItem('token');
         if (token) {
-            document.getElementById('Button2Copy').style.backgroundColor = 'orange';
+            if (document.getElementById('Button2Copy').value == 'Copy') {
+                document.getElementById('Button2Copy').style.backgroundColor = 'orange';
+                document.getElementById('Button2Copy').value = 'Uncopy';
+            } else {
+                document.getElementById('Button2Copy').style.removeProperty('background-color');
+                document.getElementById('Button2Copy').value = 'Copy';
+            }
         } else {
             window.location.href = '/register.html'
         }
@@ -1933,7 +1946,7 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
                                 <a name="ctl00$ContentPlaceHolder1$ctl00$Button2" value="Details" href="/copy-trader-details-mike.html" id="Button2" class="r-button2 r-button2-default r-button2-medium r-button2-enabled" style="width: 133px; flex-grow: 0; margin-right: 12px; background-color: rgb(239, 244, 246); color: rgb(26, 27, 31); border: rgb(239, 244, 246) !important; font-size: 16px;" >
                                     Details
                                 </a>
-                                <input name="ctl00$ContentPlaceHolder1$ctl02$Button1" value="Copy" id="Button3Copy" class="r-button2 r-button2-primary r-button2-large r-button2-enabled" style="flex-grow: 1; font-size: 16px;" />
+                                <input onclick="changeColor3()" name="ctl00$ContentPlaceHolder1$ctl02$Button1" value="Copy" id="Button3Copy" class="r-button2 r-button2-primary r-button2-large r-button2-enabled" style="flex-grow: 1; font-size: 16px;" />
                                 
                             </div>
                         </div>
@@ -1944,10 +1957,17 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
 <input type="hidden" name="ctl00$ContentPlaceHolder1$ctl02$txtID" id="txtID" value="32152" />
 
 <script>
-    function changeColor() {
+    function changeColor3() {
         const token = localStorage.getItem('token');
         if (token) {
-            document.getElementById('Button3Copy').style.backgroundColor = 'orange';
+            if (document.getElementById('Button3Copy').value == 'Copy') {
+                document.getElementById('Button3Copy').style.backgroundColor = 'orange';
+                document.getElementById('Button3Copy').value = 'Uncopy';
+            } else {
+                document.getElementById('Button3Copy').style.removeProperty('background-color');
+                document.getElementById('Button3Copy').value = 'Copy';
+            }
+
         } else {
             window.location.href = '/register.html'
         }
