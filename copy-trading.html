@@ -1744,14 +1744,16 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
             if (document.getElementById('Button1Copy').value == 'Copy') {
                 document.getElementById('Button1Copy').style.backgroundColor = 'orange';
                 document.getElementById('Button1Copy').value = 'Uncopy';
+                alert('Copy trading has been activated')
             } else {
                 document.getElementById('Button1Copy').style.removeProperty('background-color');
                 document.getElementById('Button1Copy').value = 'Copy';
+                alert('Copy trading has been deactivated')
             }
-            document.getElementById('Button1Copy').style.backgroundColor = 'orange';
         } else {
             window.location.href = '/register.html'
         }
+        document.getElementById('Button1Copy').blur()
     }
     var isTrue = false;
     $("#Button3").on("click", function (e) {
@@ -1855,13 +1857,16 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
             if (document.getElementById('Button2Copy').value == 'Copy') {
                 document.getElementById('Button2Copy').style.backgroundColor = 'orange';
                 document.getElementById('Button2Copy').value = 'Uncopy';
+                alert('Copy trading has been activated')
             } else {
                 document.getElementById('Button2Copy').style.removeProperty('background-color');
                 document.getElementById('Button2Copy').value = 'Copy';
+                alert('Copy trading has been deactivated')
             }
         } else {
             window.location.href = '/register.html'
         }
+        document.getElementById('Button2Copy').blur()
     }
     var isTrue = false;
     $("#Button3").on("click", function (e) {
@@ -1963,14 +1968,17 @@ th.el-table__cell{background-color:var(--el-table-header-bg-color);-webkit-user-
             if (document.getElementById('Button3Copy').value == 'Copy') {
                 document.getElementById('Button3Copy').style.backgroundColor = 'orange';
                 document.getElementById('Button3Copy').value = 'Uncopy';
+                alert('Copy trading has been activated')
             } else {
                 document.getElementById('Button3Copy').style.removeProperty('background-color');
                 document.getElementById('Button3Copy').value = 'Copy';
+                alert('Copy trading has been deactivated')
             }
 
         } else {
             window.location.href = '/register.html'
         }
+        document.getElementById('Button3Copy').blur()
     }
     var isTrue = false;
     $("#Button3").on("click", function (e) {
