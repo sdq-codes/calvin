@@ -1361,7 +1361,7 @@
                           </path>
                         </svg>
                       </div>
-                      <div data-v-ab44879e="" class="profile"><span data-v-ab44879e=""><span data-v-ab44879e="" class="coin-amount">0.00000000</span><span data-v-ab44879e="" class="coin-symbol">BTC</span></span><span data-v-ab44879e="" class="price-amount">≈0.00</span></div>
+                      <div data-v-ab44879e="" class="profile"><span data-v-ab44879e=""><div data-v-ab44879e="" id="txttotalbtc22" class="coin-amount">0.00000000</div><span data-v-ab44879e="" class="coin-symbol">BTC</span></span><span data-v-ab44879e="" class="price-amount">≈0.00</span></div>
                     </div>
 
                   </div>
@@ -2849,7 +2849,7 @@
               'Accept': '*/*'
             };
 
-            fetch('https://cex.io/api/tickers/USD', {
+            fetch('https://cex.io/api/last_prices/BTC', {
               method: 'GET',
               headers: headers
             })
@@ -3370,6 +3370,67 @@
               loggedInContent.style.display = 'none';
               loggedOutContent.style.display = 'flex';
           }
+
+
+          if (token) {
+              var user = JSON.parse(localStorage.getItem('user'))
+              console.log('user'.repeat(20))
+              console.log(user.user)
+
+              $.ajax({
+                  url: 'https://calvin-bitrate-0fcb0c18a396.herokuapp.com/api/v1/auth/user/' + user.user.id, // API endpoint
+                  type: 'GET', // Request method
+                  success: function(response) {
+                      console.log('Success:', response.data);
+                      var spot = response.data.spot_usd;
+                      var margin = response.data.margin_usd;
+                      var futures = response.data.futures_usd;
+                      var buysell = response.data.buy_sell_usd;
+                      var totalUsd = 0;
+
+                      $("#spotusd").text(formatToCurrency(response.data.spot_usd));
+                      $("#marginusd").text(formatToCurrency(response.data.margin_usd));
+                      $("#futuresusd").text(formatToCurrency(response.data.futures_usd));
+                      // $("#earnusd").text(formatToCurrency(response.data.earn_usd));
+                      $("#buysellusd").text(formatToCurrency(response.data.buy_sell_usd));
+                      console.log('Success:333');
+                      $("#spotper").text(formatToCurrency(response.data.spot_percentage) + "%");
+                      $("#marginper").text(formatToCurrency(response.data.margin_percentage) + "%");
+                      $("#futuresper").text(formatToCurrency(response.data.futures_percentage) + "%");
+                      // $("#earnusd").text(formatToCurrency(response.data.earn_usd));
+                      $("#buysellper").text(formatToCurrency(response.data.buy_sell_percentage) + "%");
+
+                      totalUsd = parseFloat(spot) + parseFloat(margin) + parseFloat(futures) + parseFloat(buysell);
+                      console.log('Success:5646', totalUsd);
+                      $("#txttotalusd").text("≈ "+formatToCurrency(totalUsd)+" USD");
+                      $(".price-amount").text("≈"+formatToCurrency(totalUsd));
+                      fetch('https://data-api.cryptocompare.com/index/cc/v1/latest/tick?market=cadli&instruments=BTC-USD&apply_mapping=true&api_key=f48c0e4818b68734246c7f8c3dab2e1dc2304b0c6280d378ddad2e7e33339abf', {
+                          method: 'GET',
+                          headers: {
+                              'Accept': '*/*'
+                          }
+                          })
+                          .then(res => res.json())
+                          .then(body => {
+
+                              console.log('body')
+                              $("#txttotalbtc").text(totalUsd/body.Data['BTC-USD'].VALUE)
+                              $("#txttotalbtc22").text(totalUsd/body.Data['BTC-USD'].VALUE)
+                          })
+                          .catch(error => {
+                              console.error('Error fetching last prices:', error);
+                          });
+                      // You can redirect the user or show a success message
+                  },
+                  error: function(xhr, status, error) {
+                      // Handle error
+                      console.log(xhr)
+                      console.log(status)
+                      console.log(error)
+                  }
+              });
+          }
+
       };
   </script>
 
